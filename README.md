@@ -4,7 +4,7 @@ Some guidelines for writing maintainable and modular CSS.
 
 ### One File Per Component
 
-In the same way that we should try to keep our JS logic modular by organizing it into components, we should do the same for the related styles:
+In the same way that we should try to keep our javascript logic modular by organizing it into components, we should do the same for the related styles:
 
 ```
 - Components/
@@ -25,11 +25,11 @@ Component styles should always be namespaced under a selector with the suffix `-
 }
 ```
 
-Make sure to declare variables, mixins, or any other type instide of this selector so that they are scoped to that component.
+Make sure to declare variables, mixins, or any other type inside of this selector so that they are scoped to that component.
 
 ### Component Variations
 
-To provide different styles for a component, you can define classes that can be added in addtion to the `-container` class. These class names should always be prefixed by the component name:
+To provide different styles for a component, you can define classes that can be added in addition to the `-container` class. These class names should always be prefixed by the component name:
 
 ```html
 <div class="avatar-container avatar-large"></div>
@@ -37,7 +37,7 @@ To provide different styles for a component, you can define classes that can be 
 
 ### Nested components
 
-Only a component's `-container` may be referenced from other component style declarations. If you feel the need to reach into and target any sub-elements of a component, you should stop and re-evaulate. Perhaps you need to instead add another variation to that sub-component:
+Only a component's `-container` may be referenced from other component style declarations. If you feel the need to reach into and target any sub-elements of a component, you should stop and re-evaluate. Perhaps you need to instead add another variation to that sub-component:
 
 ```scss
 .comment-container {
@@ -57,7 +57,7 @@ Styles applied in this way will most commonly be things related to layout (i.e. 
 
 ### Vendor Prefixes
 
-Use [bourbon](http://bourbon.io/docs/) as a guide for deciding whether or not you need to use a mixin for the style you are appliying. If there is a mixin for a style, use it:
+Use [bourbon](http://bourbon.io/docs/) as a guide for deciding whether or not you need to use a mixin for the style you are applying. If there is a mixin for a style, use it:
 
 ```scss
 .avatar-container {
@@ -69,7 +69,7 @@ Use [bourbon](http://bourbon.io/docs/) as a guide for deciding whether or not yo
 
 ### Use Variables
 
-If two styles are meant to have the same value, make to extract it to a variable. [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) still applies here, as usual. However, don't do this just because two styles happen to have the same value.
+If two styles are meant to have the same value, make sure to extract it into a variable. [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) still applies here, as usual. However, don't do this just because two styles happen to have the same value.
 
 ```scss
 .comment-container {
