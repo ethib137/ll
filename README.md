@@ -1,6 +1,60 @@
-# llCSS Guidelines
+# Guidelines for Component Developers
 
-Some guidelines for writing maintainable and modular CSS.
+Some guidelines for writing maintainable and modular components.
+
+## Metal
+
+### State (and Config)
+
+All attributes that a component may be passed should be listed in it's `STATE` configuration. While they are also available as `this.config[name]`, avoid referencing them there. Instead prefer `this[name]`, since props must be declared in `STATE` to be available, ensuring they are documented.
+
+The exception to this rule is `children`, which is OK to reference from `this.config`.
+
+```js
+import Component from 'metal-jsx';
+import Types from 'metal-state-validators';
+
+class LabeledButton extends Component {
+	renderLabel() {
+		/**
+		 * BAD: We should be able to see all of the accepted attributes in STATE,
+		 * but we cannot here since config exposes any attribute passed to the component.
+		 * In other words, don't expect anything other than children on the config object.
+		 */
+		return <span>{this.config.label}</span>;
+	}
+
+	render() {
+		return (
+			<div class="labeled-button">
+				{this.renderLabel()}
+
+				/**
+				* GOOD: We know that buttonText is a something we can pass
+				* to LabeledButton and that it should be a string.
+				*/
+				<Button data-onclick="onClick">{this.buttonText}</Button>
+			</div>
+		);
+	}
+}
+
+LabeledButton.STATE = {
+	buttonText: {
+		validator: Types.string
+	},
+	onClick: {
+		validator: Types.func
+	}
+};
+
+export default LabeledButton;
+
+```
+
+`STATE` is self-documenting, and should be viewed as the component's public API. Metal makes no distinction between **public** and **private** attributes, in the way that React does with `props` and `state`.
+
+## CSS
 
 ### One File Per Component
 
@@ -57,7 +111,7 @@ Styles applied in this way will most commonly be things related to layout (i.e. 
 
 ### Vendor Prefixes
 
-Use [bourbon](http://bourbon.io/docs/) as a guide for deciding whether or not you need to use a mixin for the style you are applying. If there is a mixin for a style, use it:
+Use [Bourbon](http://bourbon.io/docs/) as a guide for deciding whether or not you need to use a mixin for the style you are applying. If there is a mixin for a style, use it:
 
 ```scss
 .avatar-container {
