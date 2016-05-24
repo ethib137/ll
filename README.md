@@ -43,6 +43,7 @@ LabeledButton.STATE = {
 	buttonText: {
 		validator: Types.string
 	},
+
 	onClick: {
 		validator: Types.func
 	}
