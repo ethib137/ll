@@ -55,6 +55,22 @@ export default LabeledButton;
 
 `STATE` is self-documenting, and should be viewed as the component's public API. Metal makes no distinction between **public** and **private** attributes, in the way that React does with `props` and `state`.
 
+For our project specifically, we will declare **public** and **private** like
+
+```js
+LabeledButton.STATE = {
+	publicStateAttribute: {
+		validator: Types.string
+	},
+
+	_privateStateAttribute: {
+		value: 0
+	}
+};
+```
+
+Where private attributes are prefixed with an underscore and come after the public attributes. We also do not need to specifically declare any validators for private attributes since they are all internal.
+
 ## CSS
 
 ### One File Per Component
