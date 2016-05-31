@@ -8,7 +8,8 @@ Some guidelines for writing maintainable and modular components.
 
 All attributes that a component may be passed should be listed in it's `STATE` configuration. While they are also available as `this.config[name]`, avoid referencing them there. Instead prefer `this[name]`, since props must be declared in `STATE` to be available, ensuring they are documented.
 
-The exception to this rule is `children`, which is OK to reference from `this.config`.
+~~The exception to this rule is `children`, which is OK to reference from `this.config`.~~
+`children` will be referenced with `this.children`([issue #118](https://github.com/metal/metal.js/issues/118))
 
 ```js
 import Component from 'metal-jsx';
