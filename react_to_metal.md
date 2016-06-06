@@ -4,21 +4,21 @@ A few hints for migrating your React components to Metal.
 
 ## Lifecycle
 
-React | Metal
-- | -
-render | render
-componentDidMount | attached
-componentWillMount | created
-componentWillUnmount | disposed
-componentWillRecieveProps | sync[AttrName]
-shouldComponentUpdate | shouldUpdate
+|  React                      |  Metal           |
+| --------------------------- | ---------------- |
+|  render                     |  render          |
+|  componentDidMount          |  attached        |
+|  componentWillMount         |  created         |
+|  componentWillUnmount       |  disposed        |
+|  componentWillRecieveProps  |  sync[AttrName]  |
+|  shouldComponentUpdate      |  shouldUpdate    |
 
 ## Attributes
 
-React | Metal
-- | -
-onClick | data-onclick
-className | class
+|  React      |  Metal         |
+| ----------- | -------------- |
+|  onClick    |  data-onclick  |
+|  className  |  class         |
 
 Style objects work mostly the same, but you will need to explicitly pass the unit for any value whose type is a number:
 
@@ -32,11 +32,11 @@ const styles = {
 
 ## Accessing and Changing State
 
-React | Metal
-- | -
-this.state.x | this.x
-this.setState({x: 1, y: 2}) | this.setState({x: 1, y: 2})
-this.setState({x: 1}) | this.x = 1
+| React                       | Metal                       |
+| --------------------------- | --------------------------- |
+| this.state.x                | this.x                      |
+| this.setState({x: 1, y: 2}) | this.setState({x: 1, y: 2}) |
+| this.setState({x: 1})       | this.x = 1                  |
 
 ## Props and State
 
