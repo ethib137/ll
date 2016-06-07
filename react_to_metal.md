@@ -4,14 +4,15 @@ A few hints for migrating your React components to Metal.
 
 ## Lifecycle
 
-|  React                      |  Metal           |
-| --------------------------- | ---------------- |
-|  render                     |  render          |
-|  componentDidMount          |  attached        |
-|  componentWillMount         |  created         |
-|  componentWillUnmount       |  disposed        |
-|  componentWillRecieveProps  |  sync[AttrName]  |
-|  shouldComponentUpdate      |  shouldUpdate    |
+|  React                      |  Metal           |  Use                                     |
+| --------------------------- | ---------------- | ---------------------------------------- |
+|  render                     |  render          | *Bind functions to the instance.*        |
+|  componentDidMount          |  attached        | *Bind event listeners to dom nodes.*     |
+|  componentWillMount         |  created         |                                          |
+|                             |  detached        | *Remove event listeners from dom nodes.* |
+|  componentWillUnmount       |  disposed        |                                          |
+|  componentWillRecieveProps  |  sync[AttrName]  |                                          |
+|  shouldComponentUpdate      |  shouldUpdate    |                                          |
 
 ## Attributes
 
