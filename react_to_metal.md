@@ -90,4 +90,8 @@ class MyComponent extends Component {
 		return (
 			<div {...otherProps(this)}>
 				...
+			</div>
+		);
+	}
+}
 ```
