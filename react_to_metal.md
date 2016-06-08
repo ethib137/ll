@@ -11,7 +11,7 @@ A few hints for migrating your React components to Metal.
 |  componentWillMount         |  created         |                                          |
 |                             |  detached        | *Remove event listeners from dom nodes.* |
 |  componentWillUnmount       |  disposed        |                                          |
-|  componentWillRecieveProps  |  sync[AttrName]  |                                          |
+|  componentWillReceiveProps  |  sync[AttrName]  | *activeTab --> syncActiveTab*            |
 |  shouldComponentUpdate      |  shouldUpdate    |                                          |
 
 ## Attributes
