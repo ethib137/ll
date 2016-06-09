@@ -76,7 +76,7 @@ Where private attributes are suffixed with an underscore and should be sorted al
 
 #### Naming Event Handlers
 
-Event Handlers that are declared in the STATE as part of the public API should be named `on[descriptor][eventName]`. 
+Event Handlers that are declared in the STATE as part of the public API should be named `on[descriptor][eventName]`.
 
 ```js
 PostHeader.STATE = {
@@ -90,7 +90,7 @@ PostHeader.STATE = {
 }
 ```
 
-In the case of a component having only one instance of a given event type (ie. button or checkbox), the descriptor can be left out. 
+In the case of a component having only one instance of a given event type (ie. button or checkbox), the descriptor can be left out.
 
 ```js
 Button.STATE = {
@@ -122,12 +122,12 @@ class Post extends Component {
 		);
 	}
 
-	handleDateClick() {
+	handleDate() {
 		// do something.
 	}
 
-	handleLocationClick() {
-		// do something.
+	handleLocationClick(event) {
+		// do something with the event object.
 	}
 
 	render() {
@@ -141,52 +141,41 @@ class Post extends Component {
 	}
 }
 ```
+In the case of `handle` type events, an `event` name is not always required. Event names are only required if the method uses the `event` object such as `handleLocationClick` which is seen above.
 
-In the same way that we handled event handlers on the STATE object in the case of a component having only one instance of a given event type (ie. button or checkbox), the descriptor can be left out.
+
+If using a method in multiple places, it is best that the descriptor would describe the action
 
 ```js
 class Form extends Component {
 	created() {
-		this.handleClick = this.handleClick.bind(this);
+		this.handleMinimize = this.handleMinimize.bind(this);
 	}
 
-	handleClick() {
+	handleMinimize() {
 		// do something.
 	}
 
 	render() {
+		const {handleMinimize} = this;
+
 		return (
 			<div>
-				<Button onClick={this.handleClick} />
+				<Button onClick={handleMinimize} />
+
+				<div>
+					<span data-onclick={handleMinimize} />
+				</div>
 			</div>
 		);
 	}
 }
 ```
 
-```js
-class Form extends Component {
-	created() {
-		this.handleChange = this.handleChange.bind(this);
-	}
-
-	handleClick() {
-		// do something.
-	}
-
-	render() {
-		return (
-			<div>
-				<Checkbox onChange={this.handleChange} />
-			</div>
-		);
-	}
-}
-```
 
 ### Destructuring Functions on the Component Object
 
-Metal does not distinguish between functions declared on the component object and attributes passed into the component. This allows us to destructure functions alongside attributes. This is fine to do as long as the function that has been destructured is not being called in the current component but rather being passed throught to another component or element. 
+Metal does not distinguish between functions declared on the component object and attributes passed into the component. This allows us to destructure functions alongside attributes. This is fine to do as long as the function that has been destructured is not being called in the current component but rather being passed throught to another component or element.
 
 For example, `handleDateClick` and `handleLocationClick` may be destructured, but `renderPostContent()` should be called direclty off `this`.
 
