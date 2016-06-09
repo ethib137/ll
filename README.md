@@ -60,12 +60,12 @@ For our project specifically, we will declare **public** and **private** like
 
 ```js
 LabeledButton.STATE = {
-	publicStateAttribute: {
-		validator: Types.string
-	},
-
 	privateStateAttribute_: {
 		value: 0
+	},
+
+	publicStateAttribute: {
+		validator: Types.string
 	}
 };
 ```
