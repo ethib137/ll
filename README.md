@@ -184,6 +184,49 @@ class Form extends Component {
 }
 ```
 
+### Destructuring Functions on the Component Object
+
+Metal does not distinguish between functions declared on the component object and attributes passed into the component. This allows us to destructure functions alongside attributes. This is fine to do as long as the function that has been destructured is not being called in the current component but rather being passed throught to another component or element. 
+
+For example, `handleDateClick` and `handleLocationClick` may be destructured, but `renderPostContent()` should be called direclty off `this`.
+
+```js
+class Post extends Component {
+	created() {
+		bindAll(
+			this,
+			'handleDateClick',
+			'handleLocationClick',
+			'renderPostContent'
+		);
+	}
+
+	handleDateClick() {
+		// do something.
+	}
+
+	handleLocationClick() {
+		// do something.
+	}
+
+	renderPostContent() {
+		// do something.
+	}
+
+	render() {
+		const {handleDateClick, handleLocationClick} = this;
+
+		return (
+			<div>
+				<PostHeader onDateClick={handleDateClick} onLocationClick={handleLocationClick} />
+
+				{this.renderPostContent()}
+			</div>
+		);
+	}
+}
+```
+
 ## CSS
 
 ### One File Per Component
