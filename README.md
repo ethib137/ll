@@ -56,6 +56,8 @@ export default LabeledButton;
 
 `STATE` is self-documenting, and should be viewed as the component's public API. Metal makes no distinction between **public** and **private** attributes, in the way that React does with `props` and `state`.
 
+#### Naming STATE Attributes
+
 For our project specifically, we will declare **public** and **private** like
 
 ```js
@@ -71,6 +73,116 @@ LabeledButton.STATE = {
 ```
 
 Where private attributes are suffixed with an underscore and should be sorted along with public attributes. We also do not need to specifically declare any validators for private attributes since they are all internal.
+
+#### Naming Event Handlers
+
+Event Handlers that are declared in the STATE as part of the public API should be named `on[descriptor][eventName]`. 
+
+```js
+PostHeader.STATE = {
+	onDateClick: {
+		validator: Types.func
+	},
+
+	onLocationClick: {
+		validator: Types.func
+	}
+}
+```
+
+In the case of a component having only one instance of a given event type (ie. button or checkbox), the descriptor can be left out. 
+
+```js
+Button.STATE = {
+	onClick: {
+		validator: Types.func
+	}
+}
+```
+
+```js
+Checkbox.STATE = {
+	onChange: {
+		validator: Types.func
+	}
+}
+```
+
+Functions that are declared on the component object and will be passed into an element or component attribute should follow a different naming convention. In order to keep them from being confused with event handlers that are passed into the component they will not begin with `on` instead they will follow the following pattern:
+
+`handle[descriptor][event]`
+
+```js
+class Post extends Component {
+	created() {
+		bindAll(
+			this,
+			'handleDateClick',
+			'handleLocationClick'
+		);
+	}
+
+	handleDateClick() {
+		// do something.
+	}
+
+	handleLocationClick() {
+		// do something.
+	}
+
+	render() {
+		const {handleDateClick, handleLocationClick} = this;
+
+		return (
+			<div>
+				<PostHeader onDateClick={handleDateClick} onLocationClick={handleLocationClick} />
+			</div>
+		);
+	}
+}
+```
+
+In the same way that we handled event handlers on the STATE object in the case of a component having only one instance of a given event type (ie. button or checkbox), the descriptor can be left out.
+
+```js
+class Form extends Component {
+	created() {
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick() {
+		// do something.
+	}
+
+	render() {
+		return (
+			<div>
+				<Button onClick={this.handleClick} />
+			</div>
+		);
+	}
+}
+```
+
+```js
+class Form extends Component {
+	created() {
+		this.handleChange = this.handleChange.bind(this);
+	}
+
+	handleClick() {
+		// do something.
+	}
+
+	render() {
+		return (
+			<div>
+				<Checkbox onChange={this.handleChange} />
+			</div>
+		);
+	}
+}
+```
 
 ## CSS
 
