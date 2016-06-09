@@ -64,13 +64,13 @@ LabeledButton.STATE = {
 		validator: Types.string
 	},
 
-	_privateStateAttribute: {
+	privateStateAttribute_: {
 		value: 0
 	}
 };
 ```
 
-Where private attributes are prefixed with an underscore and come after the public attributes. We also do not need to specifically declare any validators for private attributes since they are all internal.
+Where private attributes are suffixed with an underscore and should be sorted along with public attributes. We also do not need to specifically declare any validators for private attributes since they are all internal.
 
 ## CSS
 
