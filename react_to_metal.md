@@ -17,10 +17,10 @@ A few hints for migrating your React components to Metal.
 
 ## Attributes
 
-|  React      |  Metal         |
-| ----------- | -------------- |
-|  onClick    |  data-onclick  |
-|  className  |  class         |
+|  React      |  Metal                    |
+| ----------- | ------------------------- |
+|  onClick    |  ~~data-onclick~~ onClick | 
+|  className  |  class                    |
 
 Style objects work mostly the same, but you will need to explicitly pass the unit for any value whose type is a number:
 
