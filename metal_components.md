@@ -1,4 +1,4 @@
-# Guidelines for Component Developers
+# Guidelines for Metal Component Developers
 
 Some guidelines for writing maintainable and modular components.
 
@@ -214,4 +214,45 @@ class Post extends Component {
 		);
 	}
 }
+```
+
+### When to create a folder for component organization.
+
+In the instance were a group of components are so related and interdependent that you would want to put them in the same file, create a folder and add them there. This is preferred over having multiple components in a single file because it keeps the line count of files from growing too large.
+
+One instance where this should be implemented is Radio and Radio Group. These two components will always be used together, so it makes sense to let their file structure reflect that.
+
+```
+- Components/
+	- Radio/
+		- __tests__/
+			- Group.js
+			- Radio.js
+		- Group.js
+		- index.js
+		- Radio.js
+```
+
+We will use an index in order to export all of the related components. We are also able to namespace the components as we export them. This allows us to avoid adding a namespace within the radio folder, while still namespacing it where it is used.
+
+`/index.js`
+```js
+import Group from './Group';
+import Radio from './Radio';
+
+Radio.Group = Group;
+
+export default Radio;
+```
+
+When we implement Radio it will look like this:
+
+```js
+import Radio from '../radio';
+
+<Radio.Group checked={checked} name="testradio" onChange={handleRadioChange}>
+	<Radio label="Option 1" value={0} />
+	<Radio label="Option 2" value={1} />
+	<Radio label="Option 3" value={2} />
+</Radio.Group>
 ```
