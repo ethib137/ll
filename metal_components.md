@@ -1,3 +1,7 @@
+<p align="center">
+  <img height="60" src="/images/metal_loop_circle.png" width="60" />
+</p>
+
 # Guidelines for Metal Component Developers
 
 Some guidelines for writing maintainable and modular components.
