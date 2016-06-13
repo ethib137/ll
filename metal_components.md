@@ -34,7 +34,7 @@ class LabeledButton extends Component {
 				* GOOD: We know that buttonText is a something we can pass
 				* to LabeledButton and that it should be a string.
 				*/
-				<Button data-onclick="onClick">{this.buttonText}</Button>
+				<Button onClick="onClick">{this.buttonText}</Button>
 			</div>
 		);
 	}
@@ -164,7 +164,7 @@ class Form extends Component {
 				<Button onClick={handleMinimize} />
 
 				<div>
-					<span data-onclick={handleMinimize} />
+					<span onClick={handleMinimize} />
 				</div>
 			</div>
 		);
