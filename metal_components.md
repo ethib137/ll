@@ -224,7 +224,7 @@ One instance where this should be implemented is Radio and Radio Group. These tw
 
 ```
 - Components/
-	- Radio/
+	- radio-group/
 		- __tests__/
 			- Option.js
 			- RadioGroup.js
@@ -245,7 +245,7 @@ RadioGroup.Option = Option;
 export default RadioGroup;
 ```
 
-When we implement Radio it will look like this:
+When we implement RadioGroup it will look like this:
 
 ```js
 import RadioGroup from '../radio-group';
