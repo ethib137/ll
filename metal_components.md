@@ -226,33 +226,33 @@ One instance where this should be implemented is Radio and Radio Group. These tw
 - Components/
 	- Radio/
 		- __tests__/
-			- Group.js
-			- Radio.js
-		- Group.js
+			- Option.js
+			- RadioGroup.js
 		- index.js
-		- Radio.js
+		- Option.js
+		- RadioGroup.js
 ```
 
 We will use an index in order to export all of the related components. We are also able to namespace the components as we export them. This allows us to avoid adding a namespace within the radio folder, while still namespacing it where it is used.
 
 `/index.js`
 ```js
-import Group from './Group';
-import Radio from './Radio';
+import Option from './Option';
+import RadioGroup from './RadioGroup';
 
-Radio.Group = Group;
+RadioGroup.Option = Option;
 
-export default Radio;
+export default RadioGroup;
 ```
 
 When we implement Radio it will look like this:
 
 ```js
-import Radio from '../radio';
+import RadioGroup from '../radio-group';
 
-<Radio.Group checked={checked} name="testradio" onChange={handleRadioChange}>
-	<Radio label="Option 1" value={0} />
-	<Radio label="Option 2" value={1} />
-	<Radio label="Option 3" value={2} />
-</Radio.Group>
+<RadioGroup checked={checked} name="testradio" onChange={handleRadioChange}>
+	<RadioGroup.Option label="Option 1" value={0} />
+	<RadioGroup.Option label="Option 2" value={1} />
+	<RadioGroup.Option label="Option 3" value={2} />
+</RadioGroup>
 ```
