@@ -260,3 +260,54 @@ import RadioGroup from '../radio-group';
 	<RadioGroup.Option label="Option 3" value={2} />
 </RadioGroup>
 ```
+
+### .bind()
+
+In order to make sure a function has it's `this` keyword set to the current component you should bind functions in the `created` lifecycle method.
+
+If you are only binding one function use the defaul Javascript bind method.
+
+```js
+class MyComponent extends Component {
+	created() {
+		this.myFunction = this.myFunction.bind(this);
+	}
+
+	myFunction() {
+		// Do stuff with "this".
+	}
+
+	render() {
+		return <div>My Component</div>;
+	}
+}
+```
+
+If you are binding multiple functions in the creator use lodash's bindAll method.
+
+```js
+import {bindAll} from 'lodash';
+
+class MyComponent extends Component {
+	created() {
+		bindAll(
+			this,
+			'myFunction',
+			'mySecondFunction'
+		);
+	}
+
+	myFunction() {
+		// Do stuff with "this".
+	}
+
+
+	mySecondFunction() {
+		// Do stuff with "this".
+	}
+
+	render() {
+		return <div>My Component</div>;
+	}
+}
+```
