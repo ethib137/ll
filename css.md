@@ -33,6 +33,25 @@ To provide different styles for a component, you can define classes that can be 
 <div class="avatar-container avatar-large"></div>
 ```
 
+In the case of component state, these can be one word class names such as `.selected`, `.active`, `.hover` etc.
+
+```html
+<div class="menu-item-container">
+     <div class="menu-item selected"></div>
+</div>
+```
+```css
+.menu-item {
+    color: black;
+
+    &.selected {
+        color: blue;
+    }
+}
+```
+
+When using a class to describe state, it should always be specified with the base class name `.className.stateClassName` or `&.stateClassName`
+
 ### Nested components
 
 Only a component's `-container` may be referenced from other component style declarations. If you feel the need to reach into and target any sub-elements of a component, you should stop and re-evaluate. Perhaps you need to instead add another variation to that sub-component:
