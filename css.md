@@ -1,6 +1,6 @@
 ## CSS
 
-### One File Per Component
+### One File Per Component File
 
 In the same way that we should try to keep our javascript logic modular by organizing it into components, we should do the same for the related styles:
 
@@ -11,6 +11,16 @@ In the same way that we should try to keep our javascript logic modular by organ
 - Styles/
 	- Button.scss
 	- Avatar.scss
+```
+
+If there happens to be two components in the same file(one being private), we only need one scss file.
+
+```
+- Components/
+	- InputList.js
+		- contains two components, InputList and InputListItem. But it only exports InputList since InputList consumes InputListItem.
+- Styles/
+	- InputList.scss
 ```
 
 ### Namespace Component Styles

@@ -60,6 +60,34 @@ export default LabeledButton;
 
 `STATE` is self-documenting, and should be viewed as the component's public API. Metal makes no distinction between **public** and **private** attributes, in the way that React does with `props` and `state`.
 
+For instances where we need a global component variable, but not be on the state object because it causes a re-render. We will pre-fix those attributes with an **underscore** and always declare their initial value in `created()`.
+
+```js
+class Component {
+	created() {
+		this._height = 0;
+	}
+
+	rendered() {
+		this.height = this.element.height;
+	}
+
+	render() {
+		//...
+	}
+}
+```
+
+If `this._height` was never re-declared to equal a new value, we would declare that on the state object with `readOnly: true` or we would declare it out of the context of the component entirely.
+
+```js
+const HEIGHT = '50px';
+
+class Component {
+//...
+}
+```
+
 #### Naming STATE Attributes
 
 For our project specifically, we will declare **public** and **private** like
