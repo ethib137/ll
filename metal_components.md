@@ -203,7 +203,15 @@ class Form extends Component {
 	}
 }
 ```
+#### Naming Functions that Return Renderable HTML
 
+Functions that return html that can be rendered should be prefixed by `render`.
+
+```
+render[Descriptor]() {
+	
+}
+```
 
 ### Destructuring Functions on the Component Object
 
