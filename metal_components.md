@@ -69,7 +69,7 @@ class Component {
 	}
 
 	rendered() {
-		this.height = this.element.height;
+		this._height = this.element.height;
 	}
 
 	render() {
