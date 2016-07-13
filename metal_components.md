@@ -88,23 +88,120 @@ class Component {
 }
 ```
 
-#### Naming STATE Attributes
+#### Organizing STATE Attributes
 
-For our project specifically, we will declare **public** and **private** like
+For our project specifically, we have written a helper called `createState()` that adds some sugar.
+
+`createState()` accepts an object with 3 possible keys: `CONFIG`, `STATE`, and `STORE`. This allows us to visually organize the state object so that it's API is more visually apparent.
+
+The `FollowMenu` component gives us a good example of this in action.
 
 ```js
-LabeledButton.STATE = {
-	privateStateAttribute_: {
-		value: 0
-	},
+const CONFIG = {
+	id: Types.number,
+	trigger: Types.any
+};
 
-	publicStateAttribute: {
-		validator: Types.string
+const STATE = {
+	open_: false
+};
+
+const STORE = {
+	follow: Types.func,
+	following: Types.bool,
+	followingType: Types.number,
+	notify: Types.func,
+	notifyEmail: Types.func,
+	notifying: Types.bool,
+	notifyingEmail: Types.bool,
+	schema: Types.string
+};
+
+FollowMenu.STATE = createState({CONFIG, STATE, STORE});
+
+export default connect(
+	(state, ownConfig) => {
+		const {id} = ownConfig;
+		let {schema} = ownConfig;
+
+		if (isNumber(schema)) {
+			schema = classNameIdToSchema(schema);
+		}
+
+		return {
+			following: state.getIn([schema, id, 'data', 'following']),
+			followingType: state.getIn([schema, id, 'data', 'followingType']),
+			notifying: state.getIn([schema, id, 'data', 'notifying']),
+			notifyingEmail: state.getIn([schema, id, 'data', 'notifyingEmail']),
+			schema
+		};
+	},
+	dispatch => bindActionCreators(
+		{
+			follow,
+			notify,
+			notifyEmail
+		},
+		dispatch
+	)
+)(FollowMenu);
+```
+
+There's a lot going on here, so let's break this down bit by bit.
+
+```js
+const CONFIG = {
+	id: Types.number,
+	trigger: Types.any
+};
+```
+
+`CONFIG` is used to identify public attributes that the component is expecting to have passed in when it is instantiated. In this case when FollowMenu is rendered it will have an id and a trigger (this will be an element of component) passed into it. When you pass config a single value, it assumes you are passing it `validator`. If you need to pass it a `value`, you will need to pass the config an object that declares value as a key.
+
+```js
+const CONFIG = {
+	id: {
+		validator: Types.number,
+		value: currentUser.classPK
+	},
+	trigger: Types.any
+};
+```
+
+Use `STATE` do define attributes that will only be used internally. All `STATE` attributes should be suffixed with an underscore.
+
+
+```js
+const STATE = {
+	open_: false
+};
+```
+
+If a single value is passed to `STATE` it assumes you are passing it a `value`. This makes sense since we do not require private attributes to have a validator. If for some reason you still wanted to pass a validator or another state attribute setting, you can do so by passing it an object with the desired key.
+
+```js
+const STATE = {
+	open_: {
+		setter: value => !!value,
+		value: false
 	}
 };
 ```
 
-Where private attributes are suffixed with an underscore and should be sorted along with public attributes. We also do not need to specifically declare any validators for private attributes since they are all internal.
+`STORE` is specific to Redux implementations. Use `STORE` for attributes that are passed in via the connect function. This will usually include actions as well as data that is retrieved from the store.
+
+```js
+const STORE = {
+	follow: Types.func,
+	following: Types.bool,
+	followingType: Types.number,
+	notify: Types.func,
+	notifyEmail: Types.func,
+	notifying: Types.bool,
+	notifyingEmail: Types.bool,
+	schema: Types.string
+};
+```
 
 #### Naming Event Handlers
 
